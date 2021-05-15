@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package employees;
+
+message EmployeeDetails {
+    string firstName = 1;
+    string lastName = 2;
+    float salary = 3;
+    int32 age = 4;
+    repeated int64 mobile = 5;
+}
+
+service EmployeeService {
+    rpc addEmployee (EmployeeRequest) returns (EmployeeResponse);
+    rpc getAllEmployee (EmptyRequest) returns (stream EmployeeResponse);
+    rpc editEmployee (EmployeeRequest) returns (EmployeeResponse);
+    rpc deleteEmployee (EmployeeDeleteRequest) returns (EmployeeResponse);
+}
+
+message EmptyRequest {}
+
+message EmployeeRequest {
+    EmployeeDetails employee = 1;
+}
+message EmployeeDeleteRequest {
+    string firstName = 1;
+}
+message EmployeeResponse {
+    EmployeeDetails employee = 1;
+}
